@@ -193,7 +193,7 @@ LTER Fall 2010 Databits.
 **Code to read from SBC or MCR metabase, create EML records**: 
 https://github.com/mobb/MB2EML
 
-** Code for SBC metabase maintenance (incomplete)**:
+**Code for SBC metabase maintenance (incomplete)**:
 https://github.com/mobb/MBmaint
 
 
