@@ -1,6 +1,6 @@
 Directory will hold history of forks between versions
 
-A fork is a copy of a repository which allows you to freely experiment without affecting the original project. Forks are used to 
+A fork is a copy of a project (e.g., git repository) which allows you to freely experiment without affecting the original project. Forks are used to 
 
 - propose changes to someone else's project 
 - use someone else's project as a starting point for your own 
