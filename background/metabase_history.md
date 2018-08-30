@@ -90,8 +90,8 @@ Features
 
 <td>
 <ul>
-<li>MCR, SBC schemas synchronized
 <li>PostgreSQL
+<li>MCR, SBC schemas synchronized
 <li>uses built-in XML data type
 <li>num schemas: 5
 <li>num tables: ___
