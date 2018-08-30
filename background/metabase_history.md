@@ -1,4 +1,3 @@
-<section id="categories" markdown="1">
 # Metabase History
 
 ![Metabase history](Metabase_history.png)
