@@ -5,5 +5,6 @@ UCSB (MSI) steps:
 This dir holds those fork scripts.
 
 Fork summary
-1. ___
-1. etc
+1. describe fork 1
+1. describe fork 2
+1. etc.
