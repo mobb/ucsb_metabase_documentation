@@ -63,7 +63,8 @@ Uses
 
 <td>
 <ul>
-<li>Dataset construction with R
+<li>Assemble EML records with R  
+<li>EML text content in external files
 <li>Anticipated 
 <ol>
 <li>drive website (part, TBD)
