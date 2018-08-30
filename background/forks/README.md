@@ -8,4 +8,4 @@ A fork is a copy of a repository which allows you to freely experiment without a
 The forks described (to metabase) are mainly of the second type: a starting point for a new project.
 
 Keep in mind: if you fork a project, but do not suggest merges to the original (or your changes cannot be merged), then that new forked-project is yours to maintain. 
-If you put those changes go into a production system, you cannot expect the original project to take care of it.
+This is especially important iIf you put the forked-project into a production system, because you cannot expect the original project to take care of it.
