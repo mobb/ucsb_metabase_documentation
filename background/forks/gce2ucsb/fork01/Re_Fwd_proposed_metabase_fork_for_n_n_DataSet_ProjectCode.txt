@@ -1,0 +1,158 @@
+
+Subject:
+Re: Fwd: proposed metabase fork for n:n DataSet:ProjectCode
+From:
+Wade Sheldon <sheldon@uga.edu>
+Date:
+3/26/13 5:29 PM
+To:
+Margaret O'Brien <mob@msi.ucsb.edu>
+CC:
+"M.Gastil-Buhl (\"Gastil\")" <gastil@msi.ucsb.edu>
+
+Hi Margaret,
+
+Sorry for the slow response, but I was on vacation when I received Gastil's email and I've been dealing with the usual post-return chaos ever since.
+
+I think these proposed changes make sense, and would be easy to accommodate in our instance of the metabase as well. Separating project info from data set category info provides more flexibility moving forward, as does allowing data sets to span multiple projects. The multi-project concept would affect the way we deal with project tracking and reporting for GCE (and the way we generate project elements in EML), but that wouldn't be a big deal to change.
+
+Even though the toolbox has gotten a lot of traction and dominated the work we've been doing with LNO-ARRA funds, we did propose to offer up a more generalized metabase model as part of that software ecosystem. I think including these changes (as well as rolling in the project and study tables from our ProjectDB content in a separate database) would be a good contribution to a more generalized metabase model with fewer legacy GCE features.
+
+So I wouldn't consider this a fork - just you folks taking the lead on changing the model to accommodate broader use cases. Let us know how these changes work out and we'll roll them into the new "Metabase" (ne GCE_Metabase) GCE and CWT will be moving to over here later this spring/summer.
+
+-Wade
+
+
+
+
+On 3/26/2013 5:56 PM, Margaret O'Brien wrote:
+> Hi Wade -
+> You're were probably too immersed in toolbox to be thinking about this. But I'm at the point here where not populating metabase2.DataSet is starting to hold me up. If we are going to fork, this is the best time to do it.
+>
+> Gastil's original email had two images attached of one your tables, "ProjectStudies", and I left them on for continuity. I've added 2 more images and a short description of the fork.
+>
+> The proposed fork is to fix the fact that currently, the relationship between Projects and DataSets is 1:n (thru StudyType), and we need it to be n:n. In short, GCE appears to consider datasets as belonging to only one project (and funding cycle), and for SBC and MCR, a dataset may span many funding cycles.
+>
+> Attached are 2 images, one of the metabase original relationships, and one of the proposed fork. In both diagrams, the pink are the tables as they are now, and the yellow are new.
+>
+> Notes:
+> 1. we leave ProjectStudies alone, and we do not use it.
+>
+> 2. we break the 1:n between ProjectStudies.StudyType and DataSet.StudyType
+>
+> 3. we add a new table "DataSetType" to take the place of ProjectStudies. It is independent of Projects. Instead, it is for categories of datasets.
+>
+> 4. we rename the column DataSet.StudyType to DataSet.DataSetType
+>
+> 5. DataSetType.DataSetType is 1:n with Dataset.DataSetType
+>
+> 6. Projects is now related n:n to DataSets through a new cross-reference table, ProjectDataSets.
+>
+> We can tell (by looking at GCE content) that you used ProjectStudies for a form of dataset categories, and that it looks like you started to duplicate content with the advent of GCE-II (e.g., under StudyName). Now that you've started GCE-III, maybe you've already been thinking about a change like this.
+>
+> If you'd like to talk about this, we available -
+>
+> thanks -
+> Margaret and Gastil
+>
+> -----------
+> Margaret O'Brien
+> Information Management
+> Santa Barbara Coastal LTER
+> Marine Science Institute, UCSB
+> Santa Barbara, CA 93106
+> 805-893-2071 (voice)
+> http://sbc.lternet.edu
+>
+>
+>
+> -------- Original Message --------
+> Subject:     proposed metabase fork for n:n DataSet:ProjectCode
+> Date:     Thu, 14 Mar 2013 16:33:42 -0700
+> From:     M. Gastil-Buhl <gastil@msi.ucsb.edu>
+> Reply-To:     gastil@msi.ucsb.edu
+> To:     Wade Sheldon <sheldon@uga.edu>
+> CC:     Margaret O'Brien <mob@msi.ucsb.edu>
+>
+>
+>
+> Hi Wade,
+>
+> In this email, the word "project" will be synonymous with 6-year funding
+> cycle, ie ProjectCode SBC, SBC-II, including the special cases like
+> MCR-IIa, MCR-IIb which are not actually 6 years.
+> Here, "dataset" refers to one EML data package.
+> The word "Study" is only used here as a name of existing tables or columns.
+>
+> Our datasets span more than one 6-year funding cycle. (Not all, but many
+> do, especially the time series.)
+> So, for us, Dataset and ProjectCode are many:many
+> Our Datasets are still 1:1 with StudyType because our StudyType's dont
+> encode Project.
+>
+> StudyType in GCE Metabase2 are like GCED for ProjectCode GCE and GCE2D
+> for GCE-II.
+> Our corresponding thing, DatasetType, are like MCR4000 for short-term
+> study, no matter which MCR project cycle(s) it spans.
+>
+> Also, we call StudyType "DatasetType". Our DatasetType's were already
+> quite similar to your StudyTypes.
+> MCR has DatasetTypes short-term non-thesis study, thesis, core time
+> series, non-core time series, reference, and outside-funded. We have
+> various other categorizations but the one set that is 1:1 are those
+> mutually exclusive, exhaustive categories.
+> We notice that your StudyType actually encodes ProjectCode, thus making
+> the ProjectCode column dependent on StudyType.
+> We dont encode ProjectCode in our StudyType.
+> And even if we did, that still would not solve datasets spanning projects.
+>
+> The below fork would better fit our existing model of dataset construction:
+> (1)
+> Keep StudyType as a column of DataSet since those are still 1:1
+> Although it would be better named DatasetType, we can handle the name as-is.
+> (2)
+> Remove the determination of Project by StudyType.
+> (3)
+> Have a new table, DatasetType, with 4 columns:
+>      id (what is now called StudyType; FK to StudyType col of DataSet)
+>      name (what is now called StudyName)
+>      definition (currently implicit)
+>      notes (where we confess stretches of square pegs in round holes)
+> (4)
+> New n:n xref table DatasetProject
+>      DataSetID
+>      ProjectID
+> with parent tables DataSet and Projects
+> (5)
+> Not use the table ProjectStudies.
+>
+> We have not yet looked at what depends on this table.
+>
+> An alternative would be to allow StudyType to be effectively the merge
+> of two things: DatasetType and Project, as they are currently in
+> Metabase, and replace the FK from Dataset to ProjectStudies with a xref
+> table instead, so that the StudyType:Dataset could be n:n. StudyType
+> would have to be removed as a column of Dataset because this
+> project-studytype merged id is not 1:1 with dataset.
+>
+> References:
+> 2 attached screenshots of SQL-Server content for table ProjectStudies
+> SchemaSpy view of ProjectStudies table
+> http://mcr.lternet.edu/external/tmp/gce_all_schemas/metabase2/tables/ProjectStudies.html
+>
+> Let us know if you would consider this fork a good idea or not.
+> - Gastil
+>
+
+-- 
+______________________________________________________________________________
+
+Wade M. Sheldon
+GCE-LTER Information Manager
+School of Marine Programs
+University of Georgia
+Athens, GA 30602-3636
+Email: sheldon@uga.edu
+WWW: http://gce-lter.marsci.uga.edu/bios/wsheldon
+
+

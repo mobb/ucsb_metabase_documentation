@@ -1,0 +1,51 @@
+09 Sept 0213
+fork 8 did 2 things, both requring drop-reload 
+Only one is a 'real' fork from gce-metabase, the other is choosing a postgres data type.
+
+Fork 8a from gce-metabase
+1. increase the lengh od DataSetEntities.EntityDescription to 1000 chars.
+
+SEE FORK 7, ALL DataSetEntity changes ARE SUMMARIZED THERE.
+
+
+
+
+Fork 8b
+2. choosing a postgres data type
+for metadata that is typed "real" change to "double precision"
+this lets us have more digits in things like lat and lon.
+
+ "EntityDescription" character varying(200) NOT NULL
+
+    "Distance" real,
+    "MinValid" real,
+    "MinExpected" real,
+    "MaxExpected" real,
+    "MaxValid" real,
+    "MinValue" real,
+    "MaxValue" real,
+    "EML_DatePrec" real,
+    "MinValid" real,
+    "MinExpected" real,
+    "MaxExpected" real,
+    "MaxValid" real,
+    "MinValue" real,
+    "MaxValue" real,
+    datetime_precision real,
+
+::real
+real NOT NULL
+real DEFAULT
+
+Did this by sedding the create table statements on the whole damn dump. ick, but the only option.
+
+
+sed 's/ real NOT NULL/ double precision NOT NULL/' | sed 's/ real DEFAULT/
+double precision DEFAULT/'
+
+
+then one other manual vi where the Hectacres was the last column in a CREATE TABLE
+(so there was no trailing comma to match)
+
+
+

@@ -1,0 +1,49 @@
+Fork 7:
+this fork summarizes everything done to DataSetEntities.
+
+
+1. added a column DataSetEntities.SortOrder (originally fork 3, June 2013)
+
+
+2. added a column DataSetEntities.entity_id (Fork 7, August 2013)
+
+
+3. increase the lengh od DataSetEntities.EntityDescription to 1000 chars (originally fork 8a, September 2013)
+this was done with fork 8 (8a) because it required a drop-reload, as was 8b
+
+
+
+Notes: otherEntity
+Our implementation of DataSetEntities, DataSetEntity and DataSetFile may be an interim solution. 
+See Fork 9 for info about DataSetEntity. 
+
+We currently are using EntityType only for holding the controlled vocabulary of EML entity types.
+Wade appears to have intended this table to be a mapping between an entity and the eml that holds it. 
+eg, see 
+http://mcrlter.msi.ucsb.edu/~gastilbuhl/wiki_files/IMS/document_DBs/GCE_Metabase2/SELECT_star_screens/metabase2/
+
+Our view for eml_physical has a large case statement to map between DataSetFile table and otherEntity/formatName, 
+which could be brittle. It works for now, but may need to be revisited after we regularize
+our file type content.
+
+Below is Gastil's note on a possilble alternative. We
+
+
+    Alternative maybe Better Way:
+--------------------------------------
+table EntityType is set up for defining entityType and associating file
+formats. We might change from using a hard-coded CASE in the views to using
+the EntityType table, once our file types in FileTypeList are regularized.
+The concern is that then file format is independently specified in two places.
+Perhaps a column in FileTypeList could refer to EntityType in a FK to tie the
+two together. We are postponing this until we regularize our file types.
+We do not anticipate the outside view of the views to change, only their
+defining queries.
+
+
+
+
+
+
+
+

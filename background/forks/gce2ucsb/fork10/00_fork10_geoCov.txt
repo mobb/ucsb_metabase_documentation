@@ -1,0 +1,107 @@
+Fork 10
+Sampling sites for datatsets. 
+
+Mon Sep 23 09:59:44 PDT 2013
+
+
+
+backward compatible? yes 
+essential? yes
+
+Background:
+SBC and MCR are pulling sampling site info from EML into Metabase. They will pull it back out via mb2eml.
+EML can accomidate geocov at several levels, and SBC and MCR use at least 3 (plus references via ids)
+
+Metabase has tables and columns for most info in EML's geocov tags. It has other mgt fields as well.. 
+
+Metabase has a concept of "Super site" and "sub site". Only one level of 
+parentage is allowed. Super sites have bounding boxes, and sub sites do not (ie, are single points). Super sites cannot be described as withing other super-sites.
+
+Our policies for use of geocov trees at different levels:
+SBC:  
+1. original (full nodes) should be at the highest level possible. 
+2. prescriptive trees belong at the dataset level, and can be referenced at lower levels as needed.
+3. descriptive trees can be put at the entity level. 
+4. usually, only references will appear at the attribute level.
+5. we will investigate using the sampling tree, as recommended by EML BP.
+
+MCR:
+1. 
+
+
+Fork 10 Goals:
+1. handle all the EML features that SBC and MCR use (elements, attributes within geocov tree)
+2. handle geocov trees at multiple levels
+3. set up our usage of Metabase to accomodate self-referencing sites, so that sites can be nested.
+
+
+General Approach:
+A. populate these Metabase parent tables
+SiteTypeList (existing)
+SuperSite (existing, modified)
+SiteCoordsDeg (existing)
+SiteCoordsKML (existing)
+SiteAltitude (new)
+
+and these x-ref tables
+DataSetSites (existing, modified)
+DataSetEntitySites (new)
+DataSetVariableSies (new)
+
+Fork SQL:
+1. widen column for the field SiteCode in several tables. Required drop-reload of entire DB. 
+these tables: 
+the diffs look like...
+<     "SiteCode" character varying(10) NOT NULL,
+---
+>     "SiteCode" character varying(50) NOT NULL,
+2459c2459
+<     "SiteName" character varying(50) NOT NULL,
+---
+>     "SiteName" character varying(100) NOT NULL,
+2461c2461
+<     "SiteDesc" character varying(750),
+---
+>     "SiteDesc" character varying(1000),
+6411c6411
+<     "TextPatternDefinition" character varying(100),
+---
+>      "TextPatternDefinition" character varying(500),
+
+and the sed is here:
+sed 's/"SiteCode" character varying(10) /"SiteCode" character varying(50) /'
+
+sed 's/"TextPatternDefinition" character varying(100)/ "TextPatternDefinition" character varying(500)/'
+
+(looks like Gastil recycled the above sed sh for SiteName and SiteDesc)
+(and also at the same time, widened the TextPatternDefinition, which was for DataSetVaribles - fork4)
+
+
+
+
+2. SuperSite: add a shape-type column to table
+desiginates whether the site is a point, polyline, polygon, box or vector. 
+a) handles current SBC practice and 
+b) set up for which other tables should be populated (eg, SiteCoordsDeg or SiteCoordsKML) uses a constraint-check
+
+3. SiteAltitude: add a new table.
+a) is analogous to the other descriptive tables, SiteCoords* and 
+b) accommodates the content for EML elements under boundingBox/altitude
+
+
+4. DataSetSites: add cols for ei, ai, gci
+a) holds cross-refs for geocoverage trees at dataset levels.
+
+5. DataSetEntitySites: new table.
+di, ei, sitecode, geocov-sortorder, isref
+holds cross-references for geocoverage trees at the enity level
+boolean to set whether a ref or not
+
+6. DataSetVariableSites: new table. 
+di, ei, ai, sitecode, geocov_sortorder, isref
+holds cross-references for geocoverage trees at the attribute level.
+
+
+TO DO:
+get an image of 'original'
+get a screenshot after schema spy is rerun.(see whiteboard pic till then)

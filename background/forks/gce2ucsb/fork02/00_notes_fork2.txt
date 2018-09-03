@@ -1,0 +1,38 @@
+Fork 2:
+backward-compatible changes to metabase2.DataSet table.
+
+1. We want to store an abstract in datatype XML. Added a column for this.
+2. the Abstract column is not wide enough - increase to 5000
+
+Issues: many other tables and views depend on DataSet. The best course of action is to drop and reload the whole database, with the changes.
+
+Process:
+Backup sbc_metabase
+in pgadmin: rename "sbc_metabase" to "sbc_metabase_x"
+
+pwd: GCE_Metabase/datasets/forks/fork2
+cp  ~/backup/pg_dumps/rdb2_sbc_metabase_full_2013apr03.sql rdb2_sbc_metabase_2013aprilfork2.sql
+
+make the changes to the CREATE TABLE statement: 
+...
+    "Abstract" character varying(5000) NOT NULL, -- increased allowable size from orig 2000 char 
+...
+    "AbstractXML" xml -- Holds a complete xml node, eg, <abstract><para>asdfasdf</para> .
+);
+
+diff  ~/backup/pg_dumps/rdb2_sbc_metabase_full_2013apr03.sql rdb2_sbc_metabase_2013aprilfork2.sql 
+0a1,4
+> -- FORK2: 
+> -- DataSet.Absract widening column, char varying 5000 (from 2000)
+> -- DataSet.AbstractXML adding column ype xml
+> 
+332c336
+<     "Abstract" character varying(2000) NOT NULL,
+---
+>     "Abstract" character varying(5000) NOT NULL, -- increased allowable size from orig 2000 char 
+336c340,341
+<     "DisplayOnWeb" boolean DEFAULT false NOT NULL
+---
+>     "DisplayOnWeb" boolean DEFAULT false NOT NULL,
+>     "AbstractXML" xml -- Holds a complete xml node, eg, <abstract><para>asdfasdf</para> .
+

@@ -1,0 +1,58 @@
+Fork 9
+Data Set file Information:
+Wed Sep 11 13:31:07 PDT 2013
+
+backward compatible? yes 
+essential? yes
+
+Goals:
+1. SBC and MCR need to build URLs to data entities. FilePath has a PK for each path. We need the file path in the parent table to hold several root paths, and we will add subpaths to this to build a full URL.
+
+2. we need to hold everything that is in our EML documents.
+
+Justification (goal 1):
+We analyzed our URLs to find:
+number of URL-heads and subpaths.
+SBC: 5 URL-heads and 30 subpaths for 287 entities.
+MCR: 16 URL-heads and __ subpaths for 181 entities.
+
+URL-head will go into FilePath, and have an id (PK)
+The subpaths are best kept in a controlled vocabulary, but there is no place for this. Adding this table will greatly ease our management.
+
+
+Justification (goal 2)
+EML has elements that there is currently no place in metabase for. these are necessary for parsing of files content: collapseDelimiters, literalCharacter, physicalLineEnding
+
+
+Approach:
+1. New Table: SubPathList (the table name follows Wade's naming convention)
+Two columns, 
+a) for the controlled vocabulary of sub-paths
+b) a notes column
+
+
+
+2. Add a column to DataSetFile called SubPath. 
+FK constraint to SubPathList.
+It's contents will be combined with FilePath.PathURL (in the parent table) to build a URL to an entity (file)
+
+3. Add 3 columns to FileTypeList
+collapseDelimiters, literalCharacter, physicalLineEnding
+
+See image: fork9_sketch.jpg
+
+
+See SQL: 
+
+
+
+
+Final image from schemaSpy:
+screenshot_TBD.jpg
+
+----------
+Original Metabase2 (see image DataSetFile_info_orig.jpg:
+
+
+
+

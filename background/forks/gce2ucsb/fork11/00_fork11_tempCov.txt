@@ -1,0 +1,36 @@
+Fork 11
+Temporal coverage for datatsets. 
+
+Wed Sep 25 09:59:44 PDT 2013
+
+
+
+backward compatible? yes 
+essential? yes
+
+Background:
+SBC and MCR are pulling temporal coverage pulling info from EML into Metabase. They will pull it back out via mb2eml.
+EML can accomidate temporal cov at several levels, and SBC and MCR use at least 2 (?? and maybe references via ids)
+
+Metabase has only one table that contains begin/end dates: DataSetStudy. It may not work will for our needs.  
+
+Fork 11 Goals:
+1. handle all the EML features that SBC and MCR use (elements, attributes within geocov tree)
+2. handle temporal coverage trees at multiple levels
+
+
+
+General Approach:
+There are no parent tables to populate.
+
+A. these 3 x-ref tables were added (new)
+DataSetTemporal
+DataSetEntityTemporal
+DataSetVariableTemporal 
+
+
+
+
+TO DO:
+get an image of 'original'
+get a screenshot after schema spy is rerun.(see whiteboard pic till then)

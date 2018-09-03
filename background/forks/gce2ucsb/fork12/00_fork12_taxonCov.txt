@@ -1,0 +1,57 @@
+Fork 12
+taxonomic coverage for datatsets. 
+
+Wed Oct 02 09:59:44 PDT 2013
+
+
+backward compatible? yes 
+essential? yes
+
+Background:
+A. Metabase does not include taxonomic tables. It has one cross-ref table called 
+"DataSetSpecies", which probably could be used by external code to add taxonomic 
+trees. GCE has a separate taxonomic database (see ERD in 
+SBC's GCE_Metabase/datasets/Taxonomy directory.
+ 
+B. MCR has taxonomic tables (in their production database on RDB1). Gastil will want
+to generate EML taxonomic nodes from this. SBC will most likely copy that model.
+
+C. Both sbc_metabase and mcr_metabase have a schema called "taxonomy" with one table 
+containing some sample taxonomic xml. These will be removed, or (in SBC's case) 
+replaced with tables copied from the MCR production database.
+
+
+PHASE 1:
+SBC and MCR will storing taxonomicCoverage nodes as XML in Metabase, and retrieve via mb2eml.
+
+EML can accomodate temporal cov at several levels, and SBC and MCR use at least 2 (?? and maybe references via ids)
+
+
+Fork 12 Goals:
+1. handle taxonomicCoverage elements at 2 EML levels (dataset and entity, and with references if needed
+
+
+
+General Approach:
+There are no parent tables to populate.
+
+A. these 2 x-ref tables were added (new) to the metabase2 schema.
+DataSetTaxon
+DataSetEntityTaxon
+(DataSetVariableTaxon, maybe) 
+
+See create table statements:
+create_table_DataSetEntityTaxon.sql
+vim create_table_DataSetTaxon.sql
+
+
+
+
+
+
+
+
+
+TO DO:
+get an image of 'original'
+get a screenshot after schema spy is rerun.(see whiteboard of xref-tables till then.)
