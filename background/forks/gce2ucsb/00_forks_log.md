@@ -1,4 +1,4 @@
-# Fork log, GCE metabase 2 -> UCSB (SBC, MCR LTER) 2013
+# Fork log, GCE metabase 2 to UCSB (SBC, MCR LTER) 2013
 A "fork" is a change to the metabase2 schema. There are 3 types:
 
 - essential and not backward compatible
@@ -107,9 +107,9 @@ Each fork's sql and notes are in a dir. See there for more info.
 
 - added a sort_order to keywordSet. not related to note about a future fork regarding keywords, below.
 
-Fork 14:
+**Fork 14**:
 
-**Jan 2014**
+- Jan 2014
 - DataSetFile: add a column called "FileNameReplaced" so that as we add update a time series with a new file, we can record what it replaced.  self referencing, and nullable.
 
 
@@ -119,13 +119,15 @@ TBD!
 
 
 ----------
+## Future forks
+When you write up a fork that's been noted below, give it a number, and move the short description up.
 
-When you write up a fork that's been noted below, give it a number, and move the short description up here.
+Future forks are recorded here so you can erase your white board.
 
-Future forks: recorded here so you can erase your white board.
+
+**a. real -> floating point**
 
 Noted 2013 Apr 03
-**a. real -> floating point**
 
 At least some fields with numbers typed 'real' need to switch to double precision
 the lats and lons in "SubSite" were the first ones we noticed.
@@ -151,30 +153,29 @@ split KeywordTheme into Theme and Vocab (in orig, they are conflated)
 **e. in research_project**, 
 
 Noted 2013 May 03
-we need a project:project cross ref. or something else so the relationship between projects is described. self refrencing?
+we need a project:project cross ref. or something else so the relationship between projects is 
+described. self referencing?
 
 
 
 **f. DataSetVariables**: 
 
-Noted 2013 May 03
-column ValueCodes is csv. we will make it XML, and dump our enumeratedList into it.
-This is one of the xml stubs. we have a column called enumeration_xml. The real fork will add tables to hold attribute enums.	
-
+- Noted 2013 May 03
+- column ValueCodes is csv. we will make it XML, and dump our enumeratedList into it.
+- This is one of the xml stubs. we have a column called enumeration_xml. The real fork will add tables to hold attribute enums.
 
 **g. possible new cross-ref tables**? 
 
-Noted 2013 May 03
-EntitySubSite, attributeSubsite? (this is related to taxon-coverage at different levels. does gastil have a plan for these?)
-
-
+- Noted 2013 May 03
+- EntitySubSite, attributeSubsite? (this is related to taxon-coverage at different levels. does gastil have a plan for these?)
 
 **h. packageId components - possible new table, EMLRevision**.
 
 package id has 3 components, scope, datasetId, revision.
-scope is fixed (per site)
-datasetID is key in many tables
-revision can come from one of:
+
+- scope is fixed (per site)
+- datasetID is key in many tables
+- revision can come from one of:
 
 1. query the catalog for the current resvision of that datsaetID and +1 
 2. local: metabase2.DataSetNotify: I think this is where Wade stores it
@@ -184,6 +185,7 @@ revision can come from one of:
 Oct 2013: NO FORK. 
 
 packageId = string + metabase2.dataset.datasetid + pkg_mgmt.pkg_state.rev
+
 Option 4.
 
 
@@ -197,13 +199,14 @@ Requires a drop-reload. not yet implemented.
 **j. alternateId**
 
 added feb 2014., from your notes 2013-09-23
-we might need a cross ref table, dataset_alternateID. see your paper notes, or talk to gastil. why the entity sort order?
+we might need a cross ref table, dataset_alternateID. see your paper notes, or talk to gastil. 
+why the entity sort order?
 
 cols: 
 
-datasetid
-entitysortorder
-altid
-system
+- datasetid
+- entitysortorder
+- altid
+- system
 
 
