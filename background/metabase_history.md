@@ -192,12 +192,19 @@ Implementing ProjectDB at the Georgia Coastal Ecosystems.
 LTER Fall 2010 Databits.
 
 
-## Other Related GitHub Repositories
+## Related GitHub Repositories
 **Code to read from SBC or MCR metabase, create EML records**: 
 https://github.com/mobb/MB2EML
 
 **Code for SBC metabase maintenance (incomplete)**:
 https://github.com/mobb/MBmaint
 
-**Code for Core model created and used by Santa Barbara Channel MBON (SBC MBON)**:
+### Models spawned by GCE-metabase
+**UCSB LTER metabase (2013, by SBC and MCR LTER)**:
+tbd
+
+**created and used by Santa Barbara Channel MBON (SBC MBON)**:
+tbd
+
+**SBC LTER modifications**:
 tbd
