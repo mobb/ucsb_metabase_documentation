@@ -34,7 +34,7 @@ Uses
 
 <td>
 <ul>
-<li>GCE matlab toolbox, 
+<li>GCE Matlab toolbox, 
 <li>drives GCE website (people, biblio, datasets, projects, other)
 <li>Annual report contributions
 
@@ -82,7 +82,7 @@ Features
 
 <td>
 <ul>
-<li>SQL server
+<li>SQL server (Microsoft)
 <li>num schemas: ___
 <li>Num tables: ___
 
@@ -90,7 +90,7 @@ Features
 
 <td>
 <ul>
-<li>PostgreSQL
+<li>PostgreSQL (open source)
 <li>MCR, SBC schemas synchronized
 <li>uses built-in XML data type
 <li>num schemas: 5
@@ -120,7 +120,7 @@ Activities
 </th>
 
 <td>
-col1
+&nbsp;
 </td>
 
 <td>
@@ -132,11 +132,11 @@ col1
 </ul>
 2013
 <ul>
-<li>populated tables for datasets (16)
-<li>___ forks 
+<li>populated tables for datasets (16), concurrently with
+<ul><li>14 forks (see [forks/gce2ucsb](forks/gce2ucsb))
 <li>added 2 schemas: mb2EML (for export), pkg_mgmt
 </ul>
-
+</ul>
 
 </td>
 
@@ -155,7 +155,7 @@ col1
 </ul>
 2018
 <ul>
-<li>judicious additions from sbc_metabase, to meet anticipated uses (above)
+<li>judicious additions from sbc_metabase, for anticipated uses (above)
 </td>
 
 </tr>
@@ -166,6 +166,10 @@ col1
 Gastil-Buhl, M. and M. O'Brien. 2013.
 Data Package Inventory Tracking: Slicing and Dicing with SQL.
 LTER Spring 2013 Databits.
+
+Kui Li. 2018.
+Postgres, EML and R in a data management workflow (webinar). 
+https://environmentaldatainitiative.org/events/training-webinars-workshops/previous-edi-events/postgres-eml-and-r-in-a-data-management-workflow/
 
 Kui Li and M. O’Brien. 2018.
 Postgres, EML and R in a data management workflow.
