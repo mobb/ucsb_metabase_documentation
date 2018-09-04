@@ -44,7 +44,7 @@ Uses
 <ul>
 <li>Initial
 <ul>
-<li>datasets: all EML content, management tools (EML exported)
+<li>datasets: holds all content from exant EML
 <li>research projects: all content for research projects (lterProject XML exported)
 </ul>
 <li>Anticipated 
