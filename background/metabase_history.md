@@ -133,7 +133,7 @@ Activities
 2013
 <ul>
 <li>populated tables for datasets (16), concurrently with
-<ul><li>14 forks (see [forks/gce2ucsb](forks/gce2ucsb))
+<ul><li>14 forks (see forks/gce2ucsb)
 <li>added 2 schemas: mb2EML (for export), pkg_mgmt
 </ul>
 </ul>
@@ -168,8 +168,7 @@ Data Package Inventory Tracking: Slicing and Dicing with SQL.
 LTER Spring 2013 Databits.
 
 Kui Li. 2018.
-Postgres, EML and R in a data management workflow (webinar). 
-https://environmentaldatainitiative.org/events/training-webinars-workshops/previous-edi-events/postgres-eml-and-r-in-a-data-management-workflow/
+Postgres, EML and R in a data management workflow [EDI webinar](https://environmentaldatainitiative.org/events/training-webinars-workshops/previous-edi-events/postgres-eml-and-r-in-a-data-management-workflow/)
 
 Kui Li and M. O’Brien. 2018.
 Postgres, EML and R in a data management workflow.
