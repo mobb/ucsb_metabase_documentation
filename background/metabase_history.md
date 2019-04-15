@@ -208,3 +208,6 @@ tbd
 
 **SBC LTER modifications**:
 tbd
+
+**LTER Core Metabase**:
+https://github.com/lter/LTER-core-metabase
